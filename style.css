@@ -1,1 +1,39 @@
-unknown styling to be added.
+.item-clicks {
+
+  display:flex;
+  font-size: large;
+  font-weight: bold;
+
+
+
+}
+
+main {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 80px;
+  margin: 30px auto;
+}
+
+ul {padding: 30px;
+
+
+
+}
+
+img {
+
+  height: 400px;
+  width:  auto;
+}
+
+main .all_mall {
+
+  display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+}
