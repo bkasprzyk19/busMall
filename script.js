@@ -13,9 +13,9 @@ const rightPElem = document.getElementById('right_side_p');
 
 const allItemsSectionElem = document.getElementById('all_mall');
 
-// let leftCatalog = null;
-// let rightCatalog = null;
-// let centerCatalog = null;
+let leftCatalog = null;
+let rightCatalog = null;
+let centerCatalog = null;
 
 let rounds = 25;
 
@@ -75,19 +75,19 @@ function randomItems(){
   const unavailableItems = [leftCatalog, centerCatalog, rightCatalog];
   while (unavailableItems.includes(leftCatalog)) {
     let leftIndex = Math.floor(Math.random() * Catalog.allItems.length);
-    let leftCatalog;
+    // let leftCatalog;
   
     leftCatalog = Catalog.allItems[leftIndex];
   }
   while (unavailableItems.includes(centerCatalog)) {
     let centerIndex = Math.floor(Math.random() * Catalog.allItems.length);
-    let centerCatalog;
+    // let centerCatalog;
   
     centerCatalog = Catalog.allItems[centerIndex];
   }
   while (unavailableItems.includes(rightCatalog)) {
     let rightIndex = Math.floor(Math.random() * Catalog.allItems.length);
-    let rightCatalog;
+    // let rightCatalog;
   
     rightCatalog = Catalog.allItems[rightIndex];
   }
