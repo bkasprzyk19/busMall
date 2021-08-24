@@ -196,7 +196,7 @@ function renderResults(){
 
 
 
-// allItemsSectionElem.addEventListener('click', clickHandler);
+allItemsSectionElem.addEventListener('click', clickHandler);
 
 
 
