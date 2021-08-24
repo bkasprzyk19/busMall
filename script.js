@@ -1,6 +1,6 @@
 'use strict';
 
-console.log('greeting my friends');
+console.log('greetings my friends');
 
 const leftImgElem = document.getElementById('left_side_img');
 const leftPElem = document.getElementById('left_side_p');
@@ -60,9 +60,9 @@ console.log(Catalog.allItems);
 
 // Catalog.allItems = [];
 
-Catalog.prototype.renderSingleItem = function(img, p) {
+Catalog.prototype.renderSingleItem = function(imageElem, p) {
 
-  img.src = this.image;
+  imageElem.src = this.image;
 
   p.textContent = this.name;
   this.timesShown++;
@@ -72,19 +72,48 @@ Catalog.prototype.renderSingleItem = function(img, p) {
 
 
 function randomItems(){
-  // let leftIndex;
-  let leftIndex = Math.floor(Math.random() * Catalog.allItems.length);
-
-  leftCatalog = Catalog.allItems[leftIndex];
-  let centerIndex;
-  let rightIndex;
-  while (centerIndex === undefined || centerIndex === leftIndex || rightIndex === undefined || rightIndex === centerIndex || rightIndex === leftIndex) {
-    centerIndex = Math.floor(Math.random() * Catalog.allItems.length);
-    centerCatalog = Catalog.allItems[centerIndex];
-    rightIndex = Math.floor(Math.random() * Catalog.allItems.length);
-    rightCatalog = Catalog.allItems[rightIndex];
-
+  const unavailableItems = [leftCatalog, centerCatalog, rightCatalog];
+  while (unavailableItems.includes(leftCatalog)) {
+    let leftIndex = Math.floor(Math.random() * Catalog.allItems.length);
+    let leftCatalog;
+  
+    leftCatalog = Catalog.allItems[leftIndex];
   }
+  while (unavailableItems.includes(centerCatalog)) {
+    let centerIndex = Math.floor(Math.random() * Catalog.allItems.length);
+    let centerCatalog;
+  
+    centerCatalog = Catalog.allItems[centerIndex];
+  }
+  while (unavailableItems.includes(rightCatalog)) {
+    let rightIndex = Math.floor(Math.random() * Catalog.allItems.length);
+    let rightCatalog;
+  
+    rightCatalog = Catalog.allItems[rightIndex];
+  }
+  renderThreeItems(leftCatalog, centerCatalog, rightCatalog);
+
+}
+
+
+  // let leftIndex;
+  // const leftIndex = Math.floor(Math.random() * Catalog.allItems.length);
+  // let leftCatalog;
+
+  // leftCatalog = Catalog.allItems[leftIndex];
+  // let centerCatalog;
+  // let rightCatalog;
+  // while (centerCatalog === undefined || centerCatalog === leftCatalog) {
+  //   const centerIndex = Math.floor(Math.random() * Catalog.allItems.length);
+  //   centerCatalog = Catalog.allItems[centerIndex];
+
+  // }
+  // while(!rightCatalog || rightCatalog === centerCatalog){
+  
+  //   const rightIndex = Math.floor(Math.random() * Catalog.allItems.length);
+  //   rightCatalog = Catalog.allItems[rightIndex];
+
+  // }
   
   // let rightIndex;
   // while (rightIndex === undefined || rightIndex === centerIndex || rightIndex === leftIndex) {
@@ -93,9 +122,7 @@ function randomItems(){
 
   // }
 
-  renderThreeItems(leftCatalog, centerCatalog, rightCatalog);
-
-}
+  
 
 function renderThreeItems(leftCatalog, centerCatalog, rightCatalog) {
   leftCatalog.renderSingleItem(leftImgElem, leftPElem);
@@ -111,28 +138,49 @@ function clickHandler(event) {
 
   console.log(event.target);
 
-  if (event.target === leftImgElem || event.target === centerImgElem || event.target === rightImgElem) {
+  // if (event.target === leftImgElem || event.target === centerImgElem || event.target === rightImgElem) {
 
-    rounds--;
+  //   rounds--;
 
-    if (event.target === leftImgElem){
-      leftItem.votes++;
-    }
-    if (event.target === centerImgElem) {
-      centerItem.votes++;
-    }
-    else { rightItem.votes++;}
+  //   if (event.target === leftImgElem){
+  //     leftItem.votes++;
+  //   }
+  //   if (event.target === centerImgElem) {
+  //     centerItem.votes++;
+  //   }
+  //   else { rightItem.votes++;}
 
-    if (rounds === 0) {
-      allItemsSectionElem.removeEventListener('click', clickHandler);
-      renderResults();
-    }
-    randomItems();
+  //   if (rounds === 0) {
+  //     allItemsSectionElem.removeEventListener('click', clickHandler);
+  //     renderResults();
+  //   }
+  //   randomItems();
 
+  // }
+
+  const validTargets =  [rightImgElem, centerImgElem, leftImgElem];
+if (validTargets.includes(event.target)) {
+  rounds--;
+  if (event.target === validTargets[0]) {
+    validTargets[0].votes++;
+  } else if (event.target === validTargets[1]){
+    validTargets[1].votes++;
+  } else {
+    validTargets[2].votes++;
+  } if (!rounds) {
+    allItemsSectionElem.removeEventListener('click', clickHandler);
+    alert('out of votes!');
+    renderResults();
+    renderChart();
+  } else {
+   randomItems();
   }
+}
 
 
 }
+
+
 
 function renderResults(){
 
