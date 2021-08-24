@@ -11,7 +11,7 @@ const centerPElem = document.getElementById('center_side_p');
 const rightImgElem = document.getElementById('right_side_img');
 const rightPElem = document.getElementById('right_side_p');
 
-const allItemsSectionElem = document.getElementById('all_mall');
+const allCatalogsSectionElem = document.getElementById('all_mall');
 
 let leftCatalog = null;
 let rightCatalog = null;
@@ -35,30 +35,30 @@ function Catalog (name, image) {
 
 }
 
-Catalog.allItems = [];
+Catalog.allCatalogs = [];
 
-Catalog.allItems.push(new Catalog ('bag', './img/bag.jpg'));
-Catalog.allItems.push(new Catalog ('banana', './img/banana.jpg'));
-Catalog.allItems.push(new Catalog ('bathroom', './img/bathroom.jpg'));
-Catalog.allItems.push(new Catalog ('boots', './img/boots.jpg'));
-Catalog.allItems.push(new Catalog ('breakfast', './img/breakfast.jpg'));
-Catalog.allItems.push(new Catalog ('bubblegum', './img/bubblegum.jpg'));
-Catalog.allItems.push(new Catalog ('chair', './img/chair.jpg'));
-Catalog.allItems.push(new Catalog ('cthulhu', './img/cthulhu.jpg'));
-Catalog.allItems.push(new Catalog ('dog-duck', './img/dog-duck.jpg'));
-Catalog.allItems.push(new Catalog ('dragon', './img/dragon.jpg'));
-Catalog.allItems.push(new Catalog ('pen', './img/pen.jpg'));
-Catalog.allItems.push(new Catalog ('pet-sweep', './img/pet-sweep.jpg'));
-Catalog.allItems.push(new Catalog ('scissors', './img/scissors.jpg'));
-Catalog.allItems.push(new Catalog ('tauntaun', './img/tauntaun.jpg'));
-Catalog.allItems.push(new Catalog ('unicorn', './img/unicorn.jpg'));
-Catalog.allItems.push(new Catalog ('water-can', './img/water-can.jpg'));
-Catalog.allItems.push(new Catalog ('wine-glass', './img/wine-glass.jpg'));
+Catalog.allCatalogs.push(new Catalog ('bag', './img/bag.jpg'));
+Catalog.allCatalogs.push(new Catalog ('banana', './img/banana.jpg'));
+Catalog.allCatalogs.push(new Catalog ('bathroom', './img/bathroom.jpg'));
+Catalog.allCatalogs.push(new Catalog ('boots', './img/boots.jpg'));
+Catalog.allCatalogs.push(new Catalog ('breakfast', './img/breakfast.jpg'));
+Catalog.allCatalogs.push(new Catalog ('bubblegum', './img/bubblegum.jpg'));
+Catalog.allCatalogs.push(new Catalog ('chair', './img/chair.jpg'));
+Catalog.allCatalogs.push(new Catalog ('cthulhu', './img/cthulhu.jpg'));
+Catalog.allCatalogs.push(new Catalog ('dog-duck', './img/dog-duck.jpg'));
+Catalog.allCatalogs.push(new Catalog ('dragon', './img/dragon.jpg'));
+Catalog.allCatalogs.push(new Catalog ('pen', './img/pen.jpg'));
+Catalog.allCatalogs.push(new Catalog ('pet-sweep', './img/pet-sweep.jpg'));
+Catalog.allCatalogs.push(new Catalog ('scissors', './img/scissors.jpg'));
+Catalog.allCatalogs.push(new Catalog ('tauntaun', './img/tauntaun.jpg'));
+Catalog.allCatalogs.push(new Catalog ('unicorn', './img/unicorn.jpg'));
+Catalog.allCatalogs.push(new Catalog ('water-can', './img/water-can.jpg'));
+Catalog.allCatalogs.push(new Catalog ('wine-glass', './img/wine-glass.jpg'));
 
-console.log(Catalog.allItems);
+console.log(Catalog.allCatalogs);
 
 
-// Catalog.allItems = [];
+// Catalog.allCatalogs = [];
 
 Catalog.prototype.renderSingleItem = function(imageElem, p) {
 
@@ -74,22 +74,22 @@ Catalog.prototype.renderSingleItem = function(imageElem, p) {
 function randomItems(){
   const unavailableItems = [leftCatalog, centerCatalog, rightCatalog];
   while (unavailableItems.includes(leftCatalog)) {
-    let leftIndex = Math.floor(Math.random() * Catalog.allItems.length);
+    let leftIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
     // let leftCatalog;
   
-    leftCatalog = Catalog.allItems[leftIndex];
+    leftCatalog = Catalog.allCatalogs[leftIndex];
   }
   while (unavailableItems.includes(centerCatalog)) {
-    let centerIndex = Math.floor(Math.random() * Catalog.allItems.length);
+    let centerIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
     // let centerCatalog;
   
-    centerCatalog = Catalog.allItems[centerIndex];
+    centerCatalog = Catalog.allCatalogs[centerIndex];
   }
   while (unavailableItems.includes(rightCatalog)) {
-    let rightIndex = Math.floor(Math.random() * Catalog.allItems.length);
+    let rightIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
     // let rightCatalog;
   
-    rightCatalog = Catalog.allItems[rightIndex];
+    rightCatalog = Catalog.allCatalogs[rightIndex];
   }
   renderThreeItems(leftCatalog, centerCatalog, rightCatalog);
 
@@ -97,28 +97,28 @@ function randomItems(){
 
 
   // let leftIndex;
-  // const leftIndex = Math.floor(Math.random() * Catalog.allItems.length);
+  // const leftIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
   // let leftCatalog;
 
-  // leftCatalog = Catalog.allItems[leftIndex];
+  // leftCatalog = Catalog.allCatalogs[leftIndex];
   // let centerCatalog;
   // let rightCatalog;
   // while (centerCatalog === undefined || centerCatalog === leftCatalog) {
-  //   const centerIndex = Math.floor(Math.random() * Catalog.allItems.length);
-  //   centerCatalog = Catalog.allItems[centerIndex];
+  //   const centerIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
+  //   centerCatalog = Catalog.allCatalogs[centerIndex];
 
   // }
   // while(!rightCatalog || rightCatalog === centerCatalog){
   
-  //   const rightIndex = Math.floor(Math.random() * Catalog.allItems.length);
-  //   rightCatalog = Catalog.allItems[rightIndex];
+  //   const rightIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
+  //   rightCatalog = Catalog.allCatalogs[rightIndex];
 
   // }
   
   // let rightIndex;
   // while (rightIndex === undefined || rightIndex === centerIndex || rightIndex === leftIndex) {
-  //   rightIndex = Math.floor(Math.random() * Catalog.allItems.length);
-  //   rightCatalog = Catalog.allItems[rightIndex];
+  //   rightIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
+  //   rightCatalog = Catalog.allCatalogs[rightIndex];
 
   // }
 
@@ -138,44 +138,47 @@ function clickHandler(event) {
 
   console.log(event.target);
 
-  // if (event.target === leftImgElem || event.target === centerImgElem || event.target === rightImgElem) {
+  if (event.target === leftImgElem || event.target === centerImgElem || event.target === rightImgElem) {
 
-  //   rounds--;
+    rounds--;
 
-  //   if (event.target === leftImgElem){
-  //     leftItem.votes++;
-  //   }
-  //   if (event.target === centerImgElem) {
-  //     centerItem.votes++;
-  //   }
-  //   else { rightItem.votes++;}
+    if (event.target === leftImgElem){
+      leftCatalog.votes++;
+    }
+    else if (event.target === centerImgElem) {
+      centerCatalog.votes++;
+    }
+    else { 
+      rightCatalog.votes++;
+    }
 
-  //   if (rounds === 0) {
-  //     allItemsSectionElem.removeEventListener('click', clickHandler);
-  //     renderResults();
-  //   }
-  //   randomItems();
+    if (!rounds) {
+      allCatalogsSectionElem.removeEventListener('click', clickHandler);
+      renderResults();
+      alert('out of votes!');
+    }
+    randomItems();
 
-  // }
-
-  const validTargets =  [rightImgElem, centerImgElem, leftImgElem];
-if (validTargets.includes(event.target)) {
-  rounds--;
-  if (event.target === validTargets[0]) {
-    validTargets[0].votes++;
-  } else if (event.target === validTargets[1]){
-    validTargets[1].votes++;
-  } else {
-    validTargets[2].votes++;
-  } if (!rounds) {
-    allItemsSectionElem.removeEventListener('click', clickHandler);
-    alert('out of votes!');
-    renderResults();
-    renderChart();
-  } else {
-   randomItems();
   }
-}
+
+//   const validTargets =  [rightImgElem, centerImgElem, leftImgElem];
+// if (validTargets.includes(event.target)) {
+//   rounds--;
+//   if (event.target === validTargets[0]) {
+//     validTargets[0].votes++;
+//   } else if (event.target === validTargets[1]){
+//     validTargets[1].votes++;
+//   } else {
+//     validTargets[2].votes++;
+//   } if (!rounds) {
+//     allCatalogsSectionElem.removeEventListener('click', clickHandler);
+//     alert('out of votes!');
+//     renderResults();
+//     renderChart();
+//   } else {
+//    randomItems();
+//   }
+// }
 
 
 }
@@ -186,7 +189,7 @@ function renderResults(){
 
   const ulElem = document.getElementById('item-clicks');
   ulElem.innerHTML = '';
-  for (let Catalog of Catalog.allItems){
+  for (let catalog of Catalog.allCatalogs){
     const liElem = document.createElement('li');
     liElem.textContent = `${catalog.name}: ${catalog.votes}`;
     ulElem.appendChild(liElem);
@@ -196,7 +199,7 @@ function renderResults(){
 
 
 
-allItemsSectionElem.addEventListener('click', clickHandler);
+allCatalogsSectionElem.addEventListener('click', clickHandler);
 
 
 
