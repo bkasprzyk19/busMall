@@ -136,6 +136,8 @@ function renderThreeItems(leftCatalog, centerCatalog, rightCatalog) {
 
 function clickHandler(event) {
 
+  // event.preventDefault();
+
   console.log(event.target);
 
   if (event.target === leftImgElem || event.target === centerImgElem || event.target === rightImgElem) {
