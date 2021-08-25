@@ -154,13 +154,16 @@ function clickHandler(event) {
 
     if (!rounds) {
       allCatalogsSectionElem.removeEventListener('click', clickHandler);
-      renderResults();
       renderChart();
+      
       alert('out of votes!');
     }
+    
     randomItems();
-
+    
   }
+  renderResults();
+    
 
 //   const validTargets =  [rightImgElem, centerImgElem, leftImgElem];
 // if (validTargets.includes(event.target)) {
