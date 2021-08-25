@@ -226,9 +226,12 @@ const dataPrime = [];
 
 const labelsPrime = [];
 
+const dataTwo = [];
+
 for(let catalog of Catalog.allCatalogs) {
   dataPrime.push(catalog.votes);
   labelsPrime.push(catalog.name);
+  dataTwo.push(catalog.timesShown);
 }
 
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -240,23 +243,26 @@ var myChart = new Chart(ctx, {
             label: 'Catalog Item Votes',
             data: dataPrime,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'purple'
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'white'
             ],
             borderWidth: 3
-        }]
+        } , {
+          label: 'Catalog Item Times Shown',
+            data: dataTwo,
+            backgroundColor: [
+                'orange'
+            ],
+            borderColor: [
+                'white'
+            ],
+            borderWidth: 3
+
+
+
+          }]
     },
     options: {
         scales: {
