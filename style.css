@@ -1,5 +1,8 @@
 body {
-  background-color: cadetblue;
+  background-color: rgb(231, 162, 105);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 
@@ -32,6 +35,8 @@ h1 {
   font-family: cursive;
   font-weight: bold;
   background-color: aquamarine;
+  padding-bottom: 20px;
+  
 }
 
 ul {padding: 30px;
@@ -51,4 +56,21 @@ main .all_mall {
   display: flex;
 flex-direction: row;
 justify-content: space-evenly;
+}
+
+
+footer {
+  /* display: flex;
+  flex-direction: row; */
+  margin: auto;
+  width: 800px;
+  height: auto;
+  background-color: aquamarine;
+
+ 
+ 
+}
+.chart {
+
+  
 }
