@@ -37,25 +37,61 @@ function Catalog (name, image) {
 
 Catalog.allCatalogs = [];
 
-Catalog.allCatalogs.push(new Catalog ('bag', './img/bag.jpg'));
-Catalog.allCatalogs.push(new Catalog ('banana', './img/banana.jpg'));
-Catalog.allCatalogs.push(new Catalog ('bathroom', './img/bathroom.jpg'));
-Catalog.allCatalogs.push(new Catalog ('boots', './img/boots.jpg'));
-Catalog.allCatalogs.push(new Catalog ('breakfast', './img/breakfast.jpg'));
-Catalog.allCatalogs.push(new Catalog ('bubblegum', './img/bubblegum.jpg'));
-Catalog.allCatalogs.push(new Catalog ('chair', './img/chair.jpg'));
-Catalog.allCatalogs.push(new Catalog ('cthulhu', './img/cthulhu.jpg'));
-Catalog.allCatalogs.push(new Catalog ('dog-duck', './img/dog-duck.jpg'));
-Catalog.allCatalogs.push(new Catalog ('dragon', './img/dragon.jpg'));
-Catalog.allCatalogs.push(new Catalog ('pen', './img/pen.jpg'));
-Catalog.allCatalogs.push(new Catalog ('pet-sweep', './img/pet-sweep.jpg'));
-Catalog.allCatalogs.push(new Catalog ('scissors', './img/scissors.jpg'));
-Catalog.allCatalogs.push(new Catalog ('tauntaun', './img/tauntaun.jpg'));
-Catalog.allCatalogs.push(new Catalog ('unicorn', './img/unicorn.jpg'));
-Catalog.allCatalogs.push(new Catalog ('water-can', './img/water-can.jpg'));
-Catalog.allCatalogs.push(new Catalog ('wine-glass', './img/wine-glass.jpg'));
+function getCatalogsFromStorage() {
 
-console.log(Catalog.allCatalogs);
+  const stringifiedCatalogs = localStorage.getItem('catalogs');
+  if (stringifiedCatalogs) {
+    const parsedCatalogs = JSON.parse(stringifiedCatalogs);
+    console.log(parsedCatalogs);
+    for (let catalog of parsedCatalogs) {
+      const myCatalog = new Catalog(catalog.name, catalog.image);
+      Catalog.allCatalogs.push(myCatalog);
+      myCatalog.renderResults();
+    }
+  }
+  else {
+    alert('Welcome first time user. We have no recorded storage of your activity here.');
+    Catalog.allCatalogs.push(new Catalog ('bag', './img/bag.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('banana', './img/banana.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('bathroom', './img/bathroom.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('boots', './img/boots.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('breakfast', './img/breakfast.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('bubblegum', './img/bubblegum.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('chair', './img/chair.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('cthulhu', './img/cthulhu.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('dog-duck', './img/dog-duck.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('dragon', './img/dragon.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('pen', './img/pen.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('pet-sweep', './img/pet-sweep.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('scissors', './img/scissors.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('tauntaun', './img/tauntaun.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('unicorn', './img/unicorn.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('water-can', './img/water-can.jpg'));
+    Catalog.allCatalogs.push(new Catalog ('wine-glass', './img/wine-glass.jpg'));
+  }
+}
+
+
+
+// Catalog.allCatalogs.push(new Catalog ('bag', './img/bag.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('banana', './img/banana.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('bathroom', './img/bathroom.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('boots', './img/boots.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('breakfast', './img/breakfast.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('bubblegum', './img/bubblegum.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('chair', './img/chair.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('cthulhu', './img/cthulhu.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('dog-duck', './img/dog-duck.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('dragon', './img/dragon.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('pen', './img/pen.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('pet-sweep', './img/pet-sweep.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('scissors', './img/scissors.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('tauntaun', './img/tauntaun.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('unicorn', './img/unicorn.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('water-can', './img/water-can.jpg'));
+// Catalog.allCatalogs.push(new Catalog ('wine-glass', './img/wine-glass.jpg'));
+
+// console.log(Catalog.allCatalogs);
 
 
 // Catalog.allCatalogs = [];
@@ -76,21 +112,23 @@ function randomItems(){
   while (unavailableItems.includes(leftCatalog)) {
     let leftIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
     // let leftCatalog;
-  
     leftCatalog = Catalog.allCatalogs[leftIndex];
   }
+  unavailableItems.push(leftCatalog);
   while (unavailableItems.includes(centerCatalog)) {
     let centerIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
     // let centerCatalog;
   
     centerCatalog = Catalog.allCatalogs[centerIndex];
   }
+  unavailableItems.push(centerCatalog);
   while (unavailableItems.includes(rightCatalog)) {
     let rightIndex = Math.floor(Math.random() * Catalog.allCatalogs.length);
     // let rightCatalog;
   
     rightCatalog = Catalog.allCatalogs[rightIndex];
   }
+  unavailableItems.push(rightCatalog);
   renderThreeItems(leftCatalog, centerCatalog, rightCatalog);
 
 }
@@ -132,7 +170,13 @@ function renderThreeItems(leftCatalog, centerCatalog, rightCatalog) {
 
 }
 
+function storeCatalogs() {
 
+  const stringifiedCatalogs = JSON.stringify(Catalog.allCatalogs);
+  // console.log(stringifiedCatalogs);
+
+  localStorage.setItem('catalogs', stringifiedCatalogs);
+}
 
 function clickHandler(event) {
 
@@ -159,12 +203,15 @@ function clickHandler(event) {
       renderChart();
       
       alert('out of votes!');
+      storeCatalogs();
+      renderResults();
     }
     
-    randomItems();
+    // randomItems();
     
   }
-  renderResults();
+  // renderResults();
+  
     
 
 //   const validTargets =  [rightImgElem, centerImgElem, leftImgElem];
@@ -188,6 +235,7 @@ function clickHandler(event) {
 
 
 }
+
 
 
 
@@ -276,6 +324,8 @@ var myChart = new Chart(ctx, {
 });
 }
    
+
+getCatalogsFromStorage();
 // const data = {
 //   labels: [
 //     'Red',
@@ -302,3 +352,4 @@ var myChart = new Chart(ctx, {
 //   data: data,
 //   options: {}
 // };
+
