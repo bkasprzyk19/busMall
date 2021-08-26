@@ -23,6 +23,7 @@ let rounds = 25;
 
 
 
+Catalog.allCatalogs = [];
 
 function Catalog (name, image) {
 
@@ -31,45 +32,81 @@ function Catalog (name, image) {
   this.timesShown = 0;
   this.votes = 0;
 
-  // Catalog.allItems.push(this);
+  
 
 }
 
-Catalog.allCatalogs = [];
+  
+function renderResults(){
+
+  const ulElem = document.getElementById('item-clicks');
+  ulElem.innerHTML = '';
+  for (let catalog of Catalog.allCatalogs){
+    const liElem = document.createElement('li');
+    liElem.textContent = `${catalog.name}: ${catalog.votes} out of ${catalog.timesShown} times shown.`;
+    ulElem.appendChild(liElem);
+    
+    
+  }
+}
+
+
+function storeCatalogs() {
+
+  const stringifiedCatalogs = JSON.stringify(Catalog.allCatalogs);
+  // console.log(stringifiedCatalogs);
+
+  localStorage.setItem('catalogs', stringifiedCatalogs);
+}
+
 
 function getCatalogsFromStorage() {
 
   const stringifiedCatalogs = localStorage.getItem('catalogs');
   if (stringifiedCatalogs) {
     const parsedCatalogs = JSON.parse(stringifiedCatalogs);
-    console.log(parsedCatalogs);
+    // console.log(parsedCatalogs);
     for (let catalog of parsedCatalogs) {
-      const myCatalog = new Catalog(catalog.name, catalog.image);
-      Catalog.allCatalogs.push(myCatalog);
-      myCatalog.renderResults();
-    }
-  }
-  else {
-    alert('Welcome first time user. We have no recorded storage of your activity here.');
-    Catalog.allCatalogs.push(new Catalog ('bag', './img/bag.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('banana', './img/banana.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('bathroom', './img/bathroom.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('boots', './img/boots.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('breakfast', './img/breakfast.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('bubblegum', './img/bubblegum.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('chair', './img/chair.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('cthulhu', './img/cthulhu.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('dog-duck', './img/dog-duck.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('dragon', './img/dragon.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('pen', './img/pen.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('pet-sweep', './img/pet-sweep.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('scissors', './img/scissors.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('tauntaun', './img/tauntaun.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('unicorn', './img/unicorn.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('water-can', './img/water-can.jpg'));
-    Catalog.allCatalogs.push(new Catalog ('wine-glass', './img/wine-glass.jpg'));
+      const currentCatalogName = catalog.name;
+      for (let origCatalog of Catalog.allCatalogs) {
+        const originalName = origCatalog.name;
+        if(currentCatalogName === originalName) {
+          // origCatalog.votes = parseInt(origCatalog.votes);
+          // origCatalog.timesShown = parseInt(origCatalog.timesShown);
+          origCatalog.votes = catalog.votes;
+          origCatalog.timesShown = catalog.timesShown;
+          // Catalog.allCatalogs.push(origCatalog);
+        }
+     
+      // renderResults();
+      }
+    } 
   }
 }
+//   else {
+//     alert('Welcome first time user. We have no recorded storage of your activity here.');
+//     new Catalog ('bag', './img/bag.jpg');
+//     new Catalog ('banana', './img/banana.jpg');
+//     new Catalog ('bathroom', './img/bathroom.jpg');
+//     new Catalog ('boots', './img/boots.jpg');
+//     new Catalog ('breakfast', './img/breakfast.jpg');
+//     new Catalog ('bubblegum', './img/bubblegum.jpg');
+//     new Catalog ('chair', './img/chair.jpg');
+//     new Catalog ('cthulhu', './img/cthulhu.jpg');
+//     new Catalog ('dog-duck', './img/dog-duck.jpg');
+//     new Catalog ('dragon', './img/dragon.jpg');
+//     new Catalog ('pen', './img/pen.jpg');
+//     new Catalog ('pet-sweep', './img/pet-sweep.jpg');
+//     new Catalog ('scissors', './img/scissors.jpg');
+//     new Catalog ('tauntaun', './img/tauntaun.jpg');
+//     new Catalog ('unicorn', './img/unicorn.jpg');
+//     new Catalog ('water-can', './img/water-can.jpg');
+//     new Catalog ('wine-glass', './img/wine-glass.jpg');
+//   }
+// }
+
+getCatalogsFromStorage();
+// randomItems();
 
 
 
@@ -96,9 +133,9 @@ function getCatalogsFromStorage() {
 
 // Catalog.allCatalogs = [];
 
-Catalog.prototype.renderSingleItem = function(imageElem, p) {
+Catalog.prototype.renderSingleItem = function(image, p) {
 
-  imageElem.src = this.image;
+  image.src = this.image;
 
   p.textContent = this.name;
   this.timesShown++;
@@ -128,8 +165,8 @@ function randomItems(){
   
     rightCatalog = Catalog.allCatalogs[rightIndex];
   }
-  unavailableItems.push(rightCatalog);
-  renderThreeItems(leftCatalog, centerCatalog, rightCatalog);
+  // unavailableItems.push(rightCatalog);
+  renderThreeItems();
 
 }
 
@@ -162,7 +199,7 @@ function randomItems(){
 
   
 
-function renderThreeItems(leftCatalog, centerCatalog, rightCatalog) {
+function renderThreeItems() {
   leftCatalog.renderSingleItem(leftImgElem, leftPElem);
   centerCatalog.renderSingleItem(centerImgElem, centerPElem);
   rightCatalog.renderSingleItem(rightImgElem, rightPElem);
@@ -170,13 +207,6 @@ function renderThreeItems(leftCatalog, centerCatalog, rightCatalog) {
 
 }
 
-function storeCatalogs() {
-
-  const stringifiedCatalogs = JSON.stringify(Catalog.allCatalogs);
-  // console.log(stringifiedCatalogs);
-
-  localStorage.setItem('catalogs', stringifiedCatalogs);
-}
 
 function clickHandler(event) {
 
@@ -200,18 +230,20 @@ function clickHandler(event) {
 
     if (!rounds) {
       allCatalogsSectionElem.removeEventListener('click', clickHandler);
-      renderChart();
-      
       alert('out of votes!');
+
       storeCatalogs();
-      renderResults();
+    } 
+    else {
+    randomItems();
+    
     }
-    
-    // randomItems();
-    
-  }
-  // renderResults();
   
+  }
+  renderResults();
+  renderChart();
+
+}
     
 
 //   const validTargets =  [rightImgElem, centerImgElem, leftImgElem];
@@ -234,23 +266,23 @@ function clickHandler(event) {
 // }
 
 
-}
 
 
 
 
-function renderResults(){
 
-  const ulElem = document.getElementById('item-clicks');
-  ulElem.innerHTML = '';
-  for (let catalog of Catalog.allCatalogs){
-    const liElem = document.createElement('li');
-    liElem.textContent = `${catalog.name}: ${catalog.votes} out of ${catalog.timesShown} times shown.`;
-    ulElem.appendChild(liElem);
+// function renderResults(){
+
+//   const ulElem = document.getElementById('item-clicks');
+//   ulElem.innerHTML = '';
+//   for (let catalog of Catalog.allCatalogs){
+//     const liElem = document.createElement('li');
+//     liElem.textContent = `${catalog.name}: ${catalog.votes} out of ${catalog.timesShown} times shown.`;
+//     ulElem.appendChild(liElem);
     
     
-  }
-}
+//   }
+// }
 
 
 
@@ -259,7 +291,7 @@ allCatalogsSectionElem.addEventListener('click', clickHandler);
 
 
 
-randomItems();
+// randomItems();
 
 
 
@@ -271,6 +303,8 @@ randomItems();
 // var ctx = document.getElementById('myChart').getContext('2d');
 
 function renderChart(){
+
+var ctx = document.getElementById('myChart').getContext('2d');
 
 const dataPrime = [];
 
@@ -284,7 +318,7 @@ for(let catalog of Catalog.allCatalogs) {
   dataTwo.push(catalog.timesShown);
 }
 
-var ctx = document.getElementById('myChart').getContext('2d');
+
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -321,11 +355,34 @@ var myChart = new Chart(ctx, {
             }
         }
     }
-});
-}
+  });}
+
+
+
+  Catalog.allCatalogs.push(new Catalog ('bag', './img/bag.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('banana', './img/banana.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('bathroom', './img/bathroom.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('boots', './img/boots.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('breakfast', './img/breakfast.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('bubblegum', './img/bubblegum.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('chair', './img/chair.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('cthulhu', './img/cthulhu.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('dog-duck', './img/dog-duck.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('dragon', './img/dragon.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('pen', './img/pen.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('pet-sweep', './img/pet-sweep.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('scissors', './img/scissors.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('tauntaun', './img/tauntaun.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('unicorn', './img/unicorn.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('water-can', './img/water-can.jpg'));
+  Catalog.allCatalogs.push(new Catalog ('wine-glass', './img/wine-glass.jpg'));
+
+randomItems();
+// renderThreeItems();
+getCatalogsFromStorage();
    
 
-getCatalogsFromStorage();
+
 // const data = {
 //   labels: [
 //     'Red',
@@ -352,4 +409,3 @@ getCatalogsFromStorage();
 //   data: data,
 //   options: {}
 // };
-
