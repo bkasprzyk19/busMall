@@ -80,3 +80,41 @@ formElem.addEventListener('submit', submitHandler);
 
 // ----------------- call any functions-----------------//
 
+
+
+
+var nums = [1, 2, 3, 4, 5];
+
+var multiplyByTwo = function(array) {
+  for (var i = 0; i< array.length; i++) {
+    array[i] = array[i] * 2;
+
+  }
+  return array;
+}
+
+multiplyByTwo(nums);
+console.log(nums);
+
+const userName = {
+  firstName: "brian",
+  lastName: "Kaspr",
+  password:"",
+  handler: "tree"
+  getPassword: (inputPassword) => {
+    this.password = inputPassword
+  }
+}
+const add = (x,y) => x + y;
+
+const arrayFunc = [hello, add, subtract];
+
+const getPassword = (passwordInput) => {
+  return passwordInput
+}
+const name = () => "brian"
+const hello = (func) => {
+  return () => {
+    return name();
+  }
+}

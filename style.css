@@ -36,7 +36,6 @@ h1 {
   font-weight: bold;
   background-color: aquamarine;
   padding-bottom: 20px;
-  
 }
 
 ul {padding: 30px;
@@ -74,3 +73,26 @@ footer {
 
   
 }
+/* #test {
+
+    border-width: 5px;
+    border: dashed blue;
+  
+}
+#test2 {
+  border-width: medium;
+    border: dashed blue;
+
+} */
+
+/* #top-div {
+  width: 200px;
+  position: relative;
+  background-color: blueviolet;
+}
+
+#inner-div {
+  width: 100px;
+  display: inline;
+  background-color: chartreuse;
+} */
